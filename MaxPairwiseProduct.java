@@ -37,14 +37,43 @@ public class MaxPairwiseProduct {
 
     public static void main(String[] args) {
         FastScanner scanner = new FastScanner(System.in);
-        int n = scanner.nextInt();
-        Long[] numbers = new Long[n];
-        for (int i = 0; i < n; i++) {
-            numbers[i] = scanner.nextLong();
+        // create a Random java object
+        Random random = new Random();
+
+        // int n = scanner.nextInt();
+        // Long[] numbers = new Long[n];
+        // for (int i = 0; i < n; i++) {
+        //     numbers[i] = scanner.nextLong();
+        // }
+        // //Long result1 = getMaxPairwiseProduct(numbers);
+        // Long result2 = getMaxPairwiseProductFast(numbers);
+        // System.out.println(result2);
+        while (true) {
+          int n = (int) (Math.random() * 10) + 2;
+          System.out.println("------");
+          System.out.println(n);
+          Long[] numbers = new Long[n];
+
+          for (int i = 0; i < n; i++) {
+            //numbers[i] = (Long) (Math.random() % 100000);
+            //numbers[i] = (Long)(Math.floor(Math.random() * 1000));
+            numbers[i] = (long) (1 + (random.nextInt(100)));
+          }
+
+          for (int i = 0; i < n; i++) {
+            System.out.print(numbers[i] + " ");
+          }
+
+          long res1 = getMaxPairwiseProduct(numbers);
+          long res2 = getMaxPairwiseProductFast(numbers);
+          if (res1 != res2) {
+            System.out.println("Wrong answer: " + res1 + " " + res2);
+            break;
+          } else {
+            System.out.println("OK");
+          }
+
         }
-        Long result1 = getMaxPairwiseProduct(numbers);
-        Long result2 = getMaxPairwiseProductFast(numbers);
-        System.out.println(result1 + " " + result2);
     }
 
     static class FastScanner {
