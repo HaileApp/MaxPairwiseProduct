@@ -2,20 +2,20 @@ import java.util.*;
 import java.io.*;
 
 public class MaxPairwiseProduct {
-    static Long getMaxPairwiseProduct(Long[] numbers) {
+    static Long getMaxPairwiseProduct(int[] numbers) {
         long result = 0;
         int n = numbers.length;
         for (int i = 0; i < n; ++i) {
             for (int j = i + 1; j < n; ++j) {
-                if (numbers[i] * numbers[j] > result) {
-                    result = numbers[i] * numbers[j];
+                if ((long)numbers[i] * (long)numbers[j] > result) {
+                    result = (long)numbers[i] * (long)numbers[j];
                 }
             }
         }
         return result;
     }
 
-    static Long getMaxPairwiseProductFast(Long[] numbers) {
+    static Long getMaxPairwiseProductFast(int[] numbers) {
       int n = numbers.length;
 
       int max_index1 = -1;
@@ -32,7 +32,7 @@ public class MaxPairwiseProduct {
         }
       }
 
-      return numbers[max_index1] * numbers[max_index2];
+      return (long)numbers[max_index1] * (long)numbers[max_index2];
     }
 
     public static void main(String[] args) {
@@ -52,12 +52,13 @@ public class MaxPairwiseProduct {
           int n = (int) (Math.random() * 10) + 2;
           System.out.println("------");
           System.out.println(n);
-          Long[] numbers = new Long[n];
+          int[] numbers = new int[n];
 
           for (int i = 0; i < n; i++) {
             //numbers[i] = (Long) (Math.random() % 100000);
             //numbers[i] = (Long)(Math.floor(Math.random() * 1000));
-            numbers[i] = (long) (1 + (random.nextInt(100)));
+            //numbers[i] = customNextLong(99999, 1);
+            numbers[i] = (int) Math.ceil(Math.random() * 99999);
           }
 
           for (int i = 0; i < n; i++) {
@@ -74,6 +75,15 @@ public class MaxPairwiseProduct {
           }
 
         }
+    }
+
+    static long customNextLong(Random rng, long n) {
+      long bits, val;
+      do {
+        bits = (rng.nextLong() << 1) >>> 1;
+        val = bits % n;
+      } while (bits - val + (n-1) < 0L);
+      return val;
     }
 
     static class FastScanner {
